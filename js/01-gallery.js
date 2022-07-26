@@ -29,7 +29,14 @@ function onGalleryContainerClick(event) {
     <img src =${event.target.dataset.source}>
 `);
   instance.show();
+
+  galleryContainer.addEventListener('keydown', event => {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  });
 }
+
 createImg(galleryItems);
 
 galleryContainer.insertAdjacentHTML('beforeend', imgMarkup);
