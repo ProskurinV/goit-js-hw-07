@@ -1,9 +1,11 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+// console.log(galleryItems);
 const galleryContainer = document.querySelector('.gallery');
 const imgMarkup = createImg(galleryItems);
+const backdrop = document.querySelector('.basicLightbox');
+// let instance;
 
 function createImg(img) {
   return img
@@ -25,16 +27,28 @@ function createImg(img) {
 function onGalleryContainerClick(event) {
   event.preventDefault();
 
-  const instance = basicLightbox.create(`
-    <img src =${event.target.dataset.source}>
-`);
-  instance.show();
+  const instance = basicLightbox.create(
+    `
+    <img src =${event.target.dataset.source}>`,
 
-  galleryContainer.addEventListener('keydown', event => {
-    if (event.code === 'Escape') {
-      instance.close();
+    {
+      onShow: instance => {
+        galleryContainer.addEventListener('keydown', event => {
+          if (event.code === 'Escape') {
+            instance.close();
+          }
+        });
+      },
+      // onClose: instance => {
+      //   galleryContainer.removeEventListener('keydown', event => {
+      //     if (event.code === 'Escape') {
+      //       instance.show();
+      //     }
+      //   });
+      // },
     }
-  });
+  );
+  instance.show();
 }
 
 createImg(galleryItems);
