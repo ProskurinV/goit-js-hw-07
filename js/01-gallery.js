@@ -25,9 +25,14 @@ function createImg(img) {
 function onGalleryContainerClick(event) {
   event.preventDefault();
 
+  const isImgEl = img;
+
+  if (!isImgEl) {
+    return;
+  }
+
   const instance = basicLightbox.create(
-    `
-    <img src =${event.target.dataset.source}>`,
+    `<img src =${event.target.dataset.source}>`,
 
     {
       onShow: instance => {
