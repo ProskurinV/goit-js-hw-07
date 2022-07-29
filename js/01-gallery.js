@@ -25,9 +25,7 @@ function createImg(img) {
 function onGalleryContainerClick(event) {
   event.preventDefault();
 
-  const isImgEl = img;
-
-  if (!isImgEl) {
+  if (event.target.nodeName !== 'IMG') {
     return;
   }
 
