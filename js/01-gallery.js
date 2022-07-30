@@ -1,5 +1,4 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 
 console.log(galleryItems);
 const galleryContainer = document.querySelector('.gallery');
@@ -34,21 +33,24 @@ function onGalleryContainerClick(event) {
 
     {
       onShow: instance => {
-        galleryContainer.addEventListener('keydown', event => {
-          if (event.code === 'Escape') {
-            instance.close();
-          }
-        });
+        console.log('add Listener');
+        window.addEventListener('keydown', handleEscape);
       },
-      // onClose: instance => {
-      //   galleryContainer.removeEventListener('keydown', event => {
-      //     if (event.code === 'Escape') {
-      //       instance.show();
-      //     }
-      //   });
-      // },
+      onClose: instance => {
+        console.log('remove Listener');
+        window.removeEventListener('keydown', handleEscape);
+      },
     }
   );
+
+  function handleEscape(event) {
+    if (event.key === 'Escape') {
+      console.log('esc');
+      instance.close();
+      return;
+    }
+  }
+
   instance.show();
 }
 
